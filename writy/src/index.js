@@ -7,9 +7,8 @@ import Home from './Components/Home';
 import Hero from './Components/Hero';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
-import Article from './Components/Article';
 import Header from './Components/Header';
-
+import Error from './Components/Error';
 
 ReactDOM.render(
 
@@ -20,7 +19,7 @@ ReactDOM.render(
       <Route path="/Hero" element={<Hero />}></Route>
       <Route path="/Login" element={<Login />}></Route>
       <Route path="/Signup" element={<Signup />}></Route>
-
+      <Route path="*" element={<Error/>}></Route>
 
 
     </Routes>

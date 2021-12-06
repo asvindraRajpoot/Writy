@@ -129,6 +129,7 @@ h1 {
   text-align: center;
   font-size: 3rem;
   margin-top: 3rem;
+  margin-bottom: 5rem;
 }
 
 .container {
@@ -148,6 +149,9 @@ header {
 }
 .center {
   justify-content: center;
+}
+.space-between {
+  justify-content: space-between;
 }
 .colom {
   flex-direction: column;
@@ -327,4 +331,161 @@ span {
 
 .margin {
   margin-top: 0.4rem;
+}
+
+/* error */
+svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -250px;
+  margin-left: -400px;
+}
+.message-box {
+  height: 200px;
+  width: 380px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: 50px;
+  color: #fff;
+  font-family: Roboto;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.message-box h1 {
+  color: black;
+  font-size: 60px;
+  line-height: 46px;
+  margin-bottom: 40px;
+}
+.buttons-con .action-link-wrap {
+  margin-top: 40px;
+}
+.buttons-con .action-link-wrap a {
+  background: rgb(233, 144, 10);
+  padding: 8px 25px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all 0.3s linear;
+  cursor: pointer;
+  text-decoration: none;
+  margin-right: 10px;
+  font-weight: bold;
+}
+.buttons-con .action-link-wrap a:hover {
+  background: #5a5c6c;
+  color: #fff;
+}
+
+#Polygon-1,
+#Polygon-2,
+#Polygon-3,
+#Polygon-4,
+#Polygon-4,
+#Polygon-5 {
+  animation: float 1s infinite ease-in-out alternate;
+}
+#Polygon-2 {
+  animation-delay: 0.2s;
+}
+#Polygon-3 {
+  animation-delay: 0.4s;
+}
+#Polygon-4 {
+  animation-delay: 0.6s;
+}
+#Polygon-5 {
+  animation-delay: 0.8s;
+}
+
+@keyframes float {
+  100% {
+    transform: translateY(20px);
+  }
+}
+@media (max-width: 450px) {
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -250px;
+    margin-left: -190px;
+  }
+  .message-box {
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -200px;
+    text-align: center;
+  }
+}
+p {
+  color: black;
+  font-weight: bold;
+}
+/* navlink */
+.active {
+  color: goldenrod;
+}
+
+.article {
+  background-color: gainsboro;
+  margin-top: 1rem;
+  padding: 1rem;
+  position: relative;
+}
+.fa-heart i {
+  color: white;
+  font-size: 1.3rem;
+}
+.author-des {
+  margin-top: 2rem;
+}
+.heart {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 1rem;
+  height: 1rem;
+  border: 0.1rem solid black;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.2rem;
+}
+.tag {
+  color: black;
+  background-color: gray;
+  margin-top: 0.3rem;
+  margin-left: 0.2rem;
+  padding: 1rem;
+  width: 32%;
+  border-radius: .3rem;
+  font-weight: bold;
+}
+.tags {
+  width: 100%;
+  display: flex;
+  height: 2rem;
+  flex-wrap: wrap;
+}
+
+.home {
+  display: flex;
+  justify-content: space-between;
+}
+
+.article-box{
+  width: 65%;
+}
+.tags-box{
+  width: 30%;
 }
