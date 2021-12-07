@@ -9,6 +9,7 @@ import Login from './Components/Login';
 import Signup from './Components/Signup';
 import Header from './Components/Header';
 import Error from './Components/Error';
+import SingleArticle from './Components/SingleArticle';
 
 ReactDOM.render(
 
@@ -19,7 +20,10 @@ ReactDOM.render(
       <Route path="/Hero" element={<Hero />}></Route>
       <Route path="/Login" element={<Login />}></Route>
       <Route path="/Signup" element={<Signup />}></Route>
-      <Route path="*" element={<Error/>}></Route>
+      <Route path="*" element={<Error />}></Route>
+
+      <Route path="/article/:slug" element={<SingleArticle/>}></Route>
+
 
 
     </Routes>

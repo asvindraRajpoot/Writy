@@ -20,16 +20,15 @@ class Tags extends React.Component {
     render() {
 
         const { tags } = this.state;
-        console.log(tags, 'tags');
         if (tags) {
             return (
                 <section className=" tags">
-                  
+
 
 
                     {
                         tags.tags.map((t) => {
-                            return <span className="tag">{t}</span>
+                            return <span className="tag" onClick={() => this.props.addTab(t)}>{t}</span>
                         })
 
                     }
@@ -38,7 +37,7 @@ class Tags extends React.Component {
         } else {
             return (
                 <h3>
-                   Loading...
+                    Loading...
 
                 </h3>
             )

@@ -3,6 +3,7 @@ import Articles from "./Articles";
 import Tags from "./Tags";
 import { articlesURL } from '../utils/constant';
 import Pagination from './Pagination';
+import FeedNav from "./FeedNav";
 
 class Home extends React.Component {
     constructor(props) {
@@ -12,16 +13,25 @@ class Home extends React.Component {
             articlesCount: 0,
             articlesPerPage: 10,
             activePage: 1,
+            activeTab: "",
         }
     }
     componentDidMount() {
         this.fetchData();
     }
+    emptyTab = () => {
+        this.setState({ activeTab: "" })
+    }
+    addTab = (tag) => {
+        this.setState({ activeTab: tag })
+    }
+
 
     fetchData = () => {
         const limit = this.state.articlesPerPage;
         const offset = (this.state.activePage - 1) * limit;
-        fetch(articlesURL + `/?limit=${limit}&offset=${offset}`).then((data) => data.json()).then((data) => {
+        const tag = this.state.activeTab;
+        fetch(articlesURL + `/?limit=${limit}&offset=${offset}` + (tag && `&tag=${tag}`)).then((data) => data.json()).then((data) => {
             console.log('fetched articles', data);
             this.setState({ articles: data, articlesCount: data.articlesCount })
         })
@@ -31,8 +41,8 @@ class Home extends React.Component {
         this.setState({ activePage: index }, this.fetchData);
     }
 
-    componentDidUpdate(_prevProps,prevState){
-        if(prevState.activePage!==this.state.activePage){
+    componentDidUpdate(_prevProps, prevState) {
+        if (prevState.activePage !== this.state.activePage || prevState.activeTab !== this.state.activeTab) {
             this.fetchData();
         }
 
@@ -50,7 +60,7 @@ class Home extends React.Component {
                 <h1>Welcome to Writy world</h1>
                 <div className=" home">
                     <div className="article-box">
-                        <p>Global feed</p>
+                        <FeedNav activeTab={this.state.activeTab} emptyTab={this.emptyTab} />
                         <Articles articles={this.state.articles} articlesCount={this.state.articlesCount} />
                         <div className="pagination">
                             <Pagination articlesCount={this.state.articlesCount} articlesPerPage={this.state.articlesPerPage} activePage={this.state.activePage} updateCurrentPage={this.updateCurrentPage} />
@@ -58,7 +68,7 @@ class Home extends React.Component {
                     </div>
                     <div className="tags-box">
                         <p>Popular tags</p>
-                        <Tags />
+                        <Tags addTab={this.addTab} />
                     </div>
 
 

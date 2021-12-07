@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from 'react-router-dom';
+
 
 class Article extends React.Component {
     constructor(props) {
@@ -6,17 +8,19 @@ class Article extends React.Component {
         this.state = {}
     }
     render() {
-        const {article}=this.props;
-        console.log('props',article);
+        const { article } = this.props;
+       // console.log('props', article);
         return (
             <>
                 <div className="flex space-between align-center article ">
                     <div className="flex space-between colom">
-                        <div>
-                            <h3 className="title">{article.title}</h3>
-                            <h4 className="des">{article.description}</h4>
-                            <span>Read more...</span>
-                        </div>
+                        <Link to={`/article/${article.slug}`}>
+                            <div>
+                                <h3 className="title">{article.title}</h3>
+                                <h4 className="des">{article.description}</h4>
+                                <span>Read more...</span>
+                            </div>
+                        </Link>
 
 
                         <div className="flex space-between align-center author-des">
@@ -24,7 +28,9 @@ class Article extends React.Component {
                                 <i class="fas fa-user"></i>
                             </div>
                             <div className="flex colom author-details">
-                                <blockquote>{article.author.username}</blockquote>
+                                <Link to={`/article/${article.slug}`}>
+                                    <blockquote>{article.author.username}</blockquote>
+                                </Link>
                                 <time>{article.createdAt}</time>
                             </div>
 

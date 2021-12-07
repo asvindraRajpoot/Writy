@@ -441,7 +441,7 @@ p {
   padding: 1rem;
   position: relative;
 }
-.fa-heart  {
+.fa-heart {
   color: rgb(77, 71, 71);
   font-size: 1.3rem;
 }
@@ -544,6 +544,33 @@ button {
   align-items: center;
 }
 
-.user-icon i{
+.user-icon i {
   color: white;
+}
+
+/* article single page */
+.article-description {
+  display: flex;
+  margin-top: 4rem;
+  font-size: 1.3rem;
+}
+.single-article {
+  background-color: rgba(138, 30, 30, 0.2);
+  margin-top: 3rem;
+  padding: 1rem;
+  border-radius: 0.2rem;
+}
+
+.title {
+  font-size: 2rem;
+}
+
+.feed {
+  display: flex;
+}
+.feed span {
+  color: #d13131;
+}
+.feed1 {
+  margin-left: 1rem;
 }
