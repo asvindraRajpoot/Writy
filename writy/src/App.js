@@ -1,4 +1,4 @@
-import Article from "./Components/Article";
+import Article from "./Components/Articles";
 import Header from "./Components/Header";
 import Hero from "./Components/Hero";
 import Home from "./Components/Home";

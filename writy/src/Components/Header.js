@@ -1,24 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            
+        }
     }
     render() {
         return (
             <header>
                 <nav className="container navlist">
                     <div className="brand-name">
-                        <Link to="/">
+                        <NavLink to="/">
                             <i class="fas fa-edit"></i> <a href={"s"} className="brand">Writy</a>
-                        </Link>
+                        </NavLink>
                     </div>
                     <div className="navigation">
-                        <Link to="/">  <a href={"s"}>Home</a></Link>
-                        <Link to="/Login">  <a href={"s"}>Sign in</a></Link>
-                        <Link to="/Signup">  <a href={"s"}>Sign up</a></Link>
+                        <NavLink to="/" activeClassName="active">  <a href={"s"}>Home</a></NavLink>
+                        <NavLink to="/Login" activeClassName="active">  <a href={"s"}>Sign in</a></NavLink>
+                        <NavLink to="/Signup" activeClassName="active">  <a href={"s"}>Sign up</a></NavLink>
 
 
 
