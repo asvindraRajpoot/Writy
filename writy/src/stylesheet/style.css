@@ -441,8 +441,8 @@ p {
   padding: 1rem;
   position: relative;
 }
-.fa-heart i {
-  color: white;
+.fa-heart  {
+  color: rgb(77, 71, 71);
   font-size: 1.3rem;
 }
 .author-des {
@@ -463,13 +463,14 @@ p {
 }
 .tag {
   color: black;
-  background-color: gray;
+  background-color: gainsboro;
   margin-top: 0.3rem;
   margin-left: 0.2rem;
   padding: 1rem;
   width: 32%;
-  border-radius: .3rem;
+  border-radius: 0.3rem;
   font-weight: bold;
+  color: #d13131;
 }
 .tags {
   width: 100%;
@@ -483,9 +484,66 @@ p {
   justify-content: space-between;
 }
 
-.article-box{
+.article-box {
   width: 65%;
 }
-.tags-box{
+.tags-box {
   width: 30%;
+}
+
+/* pagination */
+h5 {
+  margin: 0.3rem 0.6rem;
+}
+.active-Page {
+  background-color: black;
+  color: white;
+  border: unset;
+}
+
+.buttons-box {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+button {
+  padding: 0.4rem 0.9rem;
+  border-radius: 0.2rem;
+  width: 20%;
+}
+
+.pagination {
+  width: 40%;
+}
+
+.pagination-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* article page */
+.title {
+  color: #d13131;
+}
+.des {
+  font-weight: normal;
+  margin: 0.5rem 0;
+}
+
+.author-details {
+  margin-left: 1rem;
+}
+.user-icon {
+  width: 2rem;
+  height: 2rem;
+  border: 0.1rem solid #d13131;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-icon i{
+  color: white;
 }
