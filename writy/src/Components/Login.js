@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-
+import { ROOT_URL } from '../utils/constant';
+import User from "./user";
 class Login extends React.Component {
     constructor(props) {
         super(props);
@@ -10,7 +11,8 @@ class Login extends React.Component {
             errors: {
                 email: "",
                 password: "",
-            }
+            },
+            user: null,
 
         }
     }
@@ -50,13 +52,46 @@ class Login extends React.Component {
         })
 
     }
-    handleSubmit = () => {
-        console.log(this.state.password)
-        alert('username:' + this.state.email + 'password:' + this.state.password);
+    signUp = (data) => {
+        // console.log('data', data[0].value, data[1].value, data[2].value);
+        // console.dir(data);
+        let user = {
+            user: {
+
+                email: data[0].value,
+                password: data[1].value
+            }
+        }
+        console.log(JSON.stringify(user));
+
+        fetch(ROOT_URL + `users/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+
+
+        })
+            .then((data) => data.json())
+            .then((data) => {
+                console.log("logedIn", data);
+                this.setState({ user: data });
+            });
     }
 
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+
+        this.signUp(e.target);
+    };
+
+
     render() {
+        if (this.state.user) {
+            return <User user={this.state.user} />
+        }
         let { email, password } = this.state.errors;
         return (
             <section className="container">
