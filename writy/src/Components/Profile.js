@@ -1,4 +1,4 @@
-function User(props) {
+function Prfile(props) {
     console.log(props);
     const {user}=props
     return (
@@ -13,4 +13,4 @@ function User(props) {
     )
 }
 
-export default User;
+export default Prfile;

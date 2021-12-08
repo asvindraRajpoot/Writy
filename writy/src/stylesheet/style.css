@@ -286,7 +286,8 @@ form {
   margin-top: 3rem;
 }
 
-input {
+input,
+textarea {
   padding: 0.7rem 1.7rem;
   border-radius: 0.2rem;
   border: unset;
@@ -573,4 +574,18 @@ button {
 }
 .feed1 {
   margin-left: 1rem;
+}
+
+/* login */
+.post {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+}
+.post form {
+  width: 70%;
+}
+
+.start {
+  justify-content: flex-start;
 }
