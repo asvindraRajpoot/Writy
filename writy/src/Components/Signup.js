@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ROOT_URL } from '../utils/constant';
-import User from "./user";
-
+import Profile from "./Profile";
+import { withRouter } from 'react-router';
 class Signup extends React.Component {
     constructor(props) {
         super(props);
@@ -64,7 +64,7 @@ class Signup extends React.Component {
                 password: data[2].value
             }
         }
-        console.log(JSON.stringify(user));
+        //console.log(JSON.stringify(user));
 
         fetch(ROOT_URL + `users`, {
             method: 'POST',
@@ -75,11 +75,27 @@ class Signup extends React.Component {
 
 
         })
-            .then((data) => data.json())
+            .then((res) => {
+                if (!res.ok) {
+                    res.json().then(({ errors }) =>
+                        this.setState({ errors })
+
+                    )
+                    throw new Error('fetch is not successfull');
+                }
+                return res.json();
+            })
             .then((data) => {
-                console.log("created", data);
-                this.setState({ user: data });
-            });
+                // console.log("created", data);
+                this.props.updateUser(data)
+                this.setState({
+                    username: "",
+                    email: "",
+                    password: "",
+                    user: data
+                });
+                this.props.history.push('/')
+            }).catch((error) => { this.setState({ errors: error }) })
     }
 
 
@@ -91,7 +107,7 @@ class Signup extends React.Component {
 
     render() {
         if (this.state.user) {
-            return <User user={this.state.user}/>
+            return <Profile user={this.state.user} />
         } else {
             let { email, password, username } = this.state.errors;
             return (
@@ -153,4 +169,4 @@ class Signup extends React.Component {
         }
     }
 }
-export default Signup;
+export default withRouter(Signup);

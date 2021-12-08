@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import { ROOT_URL } from '../utils/constant';
-import User from "./user";
+import Profile from "./Profile";
+import { withRouter } from "react-router";
 class Login extends React.Component {
     constructor(props) {
         super(props);
@@ -73,13 +74,37 @@ class Login extends React.Component {
 
 
         })
-            .then((data) => data.json())
-            .then((data) => {
-                console.log("logedIn", data);
-                this.setState({ user: data });
-            });
-    }
+            .then((res) => {
+                if (!res.ok) {
+                    res.json().then(({ errors }) =>
+                        this.setState((prevState) => {
+                            return {
+                                ...prevState,
+                                errors: {
+                                    ...prevState.errors,
+                                    email: 'Email or Password is incorrect'
+                                }
+                            }
+                        })
 
+                    )
+                    throw new Error('Login is not successfull');
+                }
+                return res.json();
+            })
+            .then((data) => {
+                this.props.updateUser(data)
+                // console.log("created", data);
+                this.setState({
+
+                    user: data,
+                    email: '',
+                    password: '',
+                });
+                this.props.history.push('/')
+
+            }).catch((error) => console.log(error))
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -89,8 +114,9 @@ class Login extends React.Component {
 
 
     render() {
+        console.log('inside login');
         if (this.state.user) {
-            return <User user={this.state.user} />
+            return <Profile user={this.state.user} />
         }
         let { email, password } = this.state.errors;
         return (
@@ -129,4 +155,4 @@ class Login extends React.Component {
         )
     }
 }
-export default Login;
+export default withRouter(Login);

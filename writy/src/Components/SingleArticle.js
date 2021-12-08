@@ -12,6 +12,7 @@ class SingleArticle extends React.Component {
         // let slug = this.props.matches[0].params.slug;
         // console.log(slug,'slug')
         // console.log('prop',this.props);
+        console.log('inside login compoent');
         console.log('loca', window.location.pathname.split('/article')[1].toString());
         const slug = window.location.pathname.split('/article')[1].toString()
         // console.log(new URLSearchParams(window.location));
