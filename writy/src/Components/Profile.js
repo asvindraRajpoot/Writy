@@ -1,5 +1,5 @@
 function Prfile(props) {
-    console.log(props);
+    console.log(props,'inside profile');
     const {user}=props
     return (
         <div className="container">
