@@ -3,4 +3,6 @@ const articlesURL=ROOT_URL+'articles';
 const tagsURL=ROOT_URL+`tags`;
 const localStorageKey='app_user';
 const userVerifyURL=ROOT_URL+'user';
-export {ROOT_URL,articlesURL,tagsURL,localStorageKey,userVerifyURL};
+const newPostURL=ROOT_URL+'articles';
+const updateUser=ROOT_URL+'user'
+export {ROOT_URL,articlesURL,tagsURL,localStorageKey,userVerifyURL,newPostURL,updateUser};

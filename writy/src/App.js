@@ -26,6 +26,7 @@ class App extends React.Component {
 
   componentDidMount() {
     let storageKey = localStorage[localStorageKey]
+    console.log(storageKey, 'in app storage key')
     if (storageKey) {
       fetch(userVerifyURL, {
         method: 'GET',
@@ -49,16 +50,25 @@ class App extends React.Component {
   }
 
   updateUser = (user) => {
+    console.log('user in App component', user)
 
     this.setState({
       isLoggedIn: true,
       user: user,
       isVerifying: false,
     })
-    localStorage.setItem(localStorageKey, user.token);
+    localStorage.setItem(localStorageKey, user.user.token);
 
 
 
+  }
+
+  updateOnLogout = () => {
+    this.setState({
+      isLoggedIn: false,
+      isVerifying: false,
+    })
+    localStorage.clear();
   }
   render() {
     if (this.state.isVerifying) {
@@ -69,7 +79,7 @@ class App extends React.Component {
 
 
 
-          <Header userInfo={this.state} />
+          <Header userInfo={this.state} updateUser={this.updateOnLogout} />
           {
             this.state.isLoggedIn ? <AuthenticatedApp /> : <UnauthenticatedApp updateUser={this.updateUser} />
           }

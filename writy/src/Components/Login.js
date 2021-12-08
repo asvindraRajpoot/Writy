@@ -94,7 +94,8 @@ class Login extends React.Component {
             })
             .then((data) => {
                 this.props.updateUser(data)
-                // console.log("created", data);
+                 console.log("loggedIn", data,this.props);
+                 
                 this.setState({
 
                     user: data,
