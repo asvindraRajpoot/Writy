@@ -2,7 +2,7 @@ import React from "react";
 
 function Pagination(props) {
     const { articlesCount, articlesPerPage, activePage, updateCurrentPage } = props;
-    console.log(activePage, 'activePage')
+   // console.log(activePage, 'activePage')
     let numberOfPages = Math.ceil(articlesCount / articlesPerPage);
     let count = [];
     for (let i = 1; i <= numberOfPages; i++) {

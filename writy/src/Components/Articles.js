@@ -5,7 +5,7 @@ import Article from "./Article";
 
 function Articles(props) {
     const { articles, articlesCount } = props;
-   // console.log(articles, articlesCount,props);
+    console.log(articles, articlesCount,'inside articles profile');
     if (articlesCount) {
 
         return (
