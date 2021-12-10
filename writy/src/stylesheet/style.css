@@ -602,19 +602,27 @@ h6 {
 }
 .center strong {
   margin-top: 1rem;
-  
 }
 
 .profile-data {
   margin-top: 1rem;
 }
 .edit-btn {
-
   display: flex;
   justify-content: flex-end;
 }
 
-.profile-articles{
-  
+.profile-articles {
   margin-top: 3rem;
+}
+
+/* comments */
+.width {
+  width: 100%;
+}
+.name {
+  color: white;
+  margin-right: 1rem;
+  margin: 0;
+
 }

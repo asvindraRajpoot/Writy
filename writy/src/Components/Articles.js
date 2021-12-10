@@ -4,8 +4,8 @@ import Loader from './Loader';
 import Article from "./Article";
 
 function Articles(props) {
-    const { articles, articlesCount } = props;
-    console.log(articles, articlesCount,'inside articles profile');
+    const { articles, articlesCount,user } = props;
+    console.log(articles, articlesCount,props,'inside articles profile');
     if (articlesCount) {
 
         return (
@@ -16,7 +16,7 @@ function Articles(props) {
                     <hr />
                     {
                         articles.articles.map((a) => {
-                            return <Article article={a} />
+                            return <Article article={a} user={user} />
                         })
 
                     }
