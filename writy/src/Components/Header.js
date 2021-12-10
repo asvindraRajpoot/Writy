@@ -11,18 +11,18 @@ class Header extends React.Component {
 
 
     handleLogout = () => {
-       console.log(this.props,'logout props');
+       // console.log(this.props, 'logout props');
         this.props.updateUser();
 
 
 
     }
     render() {
-        console.log(this.props.userInfo, 'userInfo');
+       // console.log(this.props.userInfo, 'userInfo');
         return (
             <header>
                 {
-                    this.props.userInfo.isLoggedIn ? <AuthHeader handleLogout={this.handleLogout} /> : <NonAuthHeader />
+                    this.props.userInfo.isLoggedIn ? <AuthHeader handleLogout={this.handleLogout} userInfo={this.props.userInfo} /> : <NonAuthHeader />
 
                 }
             </header>
@@ -32,6 +32,7 @@ class Header extends React.Component {
 
 
 function AuthHeader(props) {
+    //console.log('auth header props', props.userInfo);
     return (
         <nav className="container navlist">
             <div className="brand-name">
@@ -43,7 +44,7 @@ function AuthHeader(props) {
                 <NavLink to="/" activeClassName="active">  <a href={"s"}>Home</a></NavLink>
                 <NavLink to="/newPost" activeClassName="active">  <a href={"s"}>New Post</a></NavLink>
                 <NavLink to="/settings" activeClassName="active">  <a href={"s"}>Settings</a></NavLink>
-                <NavLink to="/profile" activeClassName="active">  <a href={"s"}>user</a></NavLink>
+                <NavLink to="/profile" activeClassName="active">  <a href={"s"}>{props.userInfo.user.user.username}</a></NavLink>
                 <NavLink to="/" activeClassName="active">  <a href={"s"} onClick={props.handleLogout}>Logout</a></NavLink>
 
 

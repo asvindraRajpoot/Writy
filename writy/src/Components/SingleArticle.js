@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation, withRouter } from "react-router-dom";
 import { articlesURL } from '../utils/constant';
 
 class SingleArticle extends React.Component {
@@ -12,10 +12,11 @@ class SingleArticle extends React.Component {
         // let slug = this.props.matches[0].params.slug;
         // console.log(slug,'slug')
         // console.log('prop',this.props);
-        console.log('inside login compoent');
-        console.log('loca', window.location.pathname.split('/article')[1].toString());
-        const slug = window.location.pathname.split('/article')[1].toString()
-        // console.log(new URLSearchParams(window.location));
+        let slug = this.props.match.params.slug;
+        // console.log('inside login compoent');
+        // console.log('loca', window.location.pathname.split('/article')[1].toString());
+        // const slug = window.location.pathname.split('/article')[1].toString()
+        // // console.log(new URLSearchParams(window.location));
 
         fetch(articlesURL + '/' + slug).then((data) => data.json()).then((data) => {
             console.log('fetched articles', data);
@@ -26,9 +27,9 @@ class SingleArticle extends React.Component {
 
 
     render() {
-       
+
         const { article } = this.state;
-        
+
 
 
         if (!article) {
@@ -37,7 +38,7 @@ class SingleArticle extends React.Component {
 
             </h3>
         } else {
-            const a=article.article;
+            const a = article.article;
             return (
                 <>
                     <div className="container">
@@ -65,6 +66,16 @@ class SingleArticle extends React.Component {
 
 
                     </div>
+                    {
+                        this.props.user === null ? (<div>
+                            <h2>
+                                <NavLink to='/Login' className="navlink">Sign in</NavLink>or
+                                <NavLink to='/Signup' className="navlink">Sign up</NavLink>
+                                to add comments on this article.
+                            </h2>
+                        </div>) : ('')
+                    }
+
 
                 </>
             )
@@ -77,4 +88,4 @@ class SingleArticle extends React.Component {
 
 }
 
-export default SingleArticle
+export default withRouter(SingleArticle)

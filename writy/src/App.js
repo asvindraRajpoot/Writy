@@ -26,7 +26,7 @@ class App extends React.Component {
 
   componentDidMount() {
     let storageKey = localStorage[localStorageKey]
-    console.log(storageKey, 'in app storage key')
+    //console.log(storageKey, 'in app storage key')
     if (storageKey) {
       fetch(userVerifyURL, {
         method: 'GET',
@@ -34,23 +34,19 @@ class App extends React.Component {
           authorization: `Token ${storageKey}`
 
         }
-      }).then((res) => {
-        if (res.ok) {
-          return res.json().then(({ errors }) => {
-            return Promise.reject(errors);
-          })
-        }
-      }).then((user) => {
+      }).then((res) => res.json()).then((user) => {
+        //console.log(user, 'user inside then');
+
         this.updateUser(user);
 
-      }).catch((errors) => console.log(errors));
+      })
     } else {
       this.setState({ isVerifying: false })
     }
   }
 
   updateUser = (user) => {
-    console.log('user in App component', user)
+    //console.log('user in App component', user)
 
     this.setState({
       isLoggedIn: true,
@@ -73,7 +69,9 @@ class App extends React.Component {
   render() {
     if (this.state.isVerifying) {
       return <FullPageSpinner />
+
     } else {
+
       return (
         <>
 
@@ -81,7 +79,7 @@ class App extends React.Component {
 
           <Header userInfo={this.state} updateUser={this.updateOnLogout} />
           {
-            this.state.isLoggedIn ? <AuthenticatedApp /> : <UnauthenticatedApp updateUser={this.updateUser} />
+            this.state.isLoggedIn ? <AuthenticatedApp user={this.state.user} /> : <UnauthenticatedApp updateUser={this.updateUser} user={this.state.user} />
           }
 
 
@@ -94,19 +92,22 @@ class App extends React.Component {
     }
   }
 }
-function AuthenticatedApp() {
+
+function AuthenticatedApp(props) {
   return (
     <Switch>
 
       <Route path="/" exact><Home /></Route>
       <Route path="/Hero" > <Hero /></Route>
-      <Route path="/newPost" > <NewPost /></Route>
+      <Route path="/newPost" > <NewPost user={props.user} /></Route>
       <Route path="/settings" > <Setting /></Route>
-      <Route path="/profile" > <Profile /></Route>
+      <Route path="/profile" > <Profile user={props.user} /></Route>
 
 
 
-      <Route path="/article/:slug" component={SingleArticle}></Route>
+      <Route path="/article/:slug" >
+        <SingleArticle user={props.user} />
+      </Route>
       <Route path="*"><Error /></Route>
     </Switch>
 
@@ -123,7 +124,9 @@ function UnauthenticatedApp(props) {
       <Route path="/Signup" ><Signup updateUser={props.updateUser} /></Route>
 
 
-      <Route path="/article/:slug" component={SingleArticle}></Route>
+      <Route path="/article/:slug" >
+        <SingleArticle user={props.user} />
+      </Route>
       <Route path="*"><Error /></Route>
     </Switch>
 

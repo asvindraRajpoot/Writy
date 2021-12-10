@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, withRouter } from 'react-router-dom';
 import { articlesURL, localStorageKey } from '../utils/constant';
 import Article from "./Articles";
 import Home from "./Home";
@@ -39,15 +39,17 @@ class NewPost extends React.Component {
             let article = {}
             article.article = this.state.article;
 
-            console.log(article)
+            //console.log(article)
             let storageKey = localStorage[localStorageKey]
-            console.log(storageKey, 'storagekey')
+            // console.log(storageKey, 'storagekey')
+            console.log(this.props);
+
             if (storageKey) {
                 fetch(articlesURL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        authorization: `Token ${storageKey}`
+                        authorization: `Token ${this.props.user.user.token}`
                     },
                     body: JSON.stringify(article)
                 }).then((res) => res.json()).then((article) => {
@@ -60,6 +62,7 @@ class NewPost extends React.Component {
                             tagList: '',
                         },
                     })
+                    this.props.history.push('/');
 
                     console.log('this is props in new post');
 
@@ -97,4 +100,4 @@ class NewPost extends React.Component {
     }
 }
 
-export default NewPost;
+export default withRouter(NewPost);
