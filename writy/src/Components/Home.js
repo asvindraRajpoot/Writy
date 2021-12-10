@@ -66,6 +66,7 @@ class Home extends React.Component {
             <Articles
               articles={this.state.articles}
               articlesCount={this.state.articlesCount}
+              user={this.props.user.user}
             />
             <div className="pagination">
               <Pagination

@@ -1,15 +1,63 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-
+import { Link, withRouter } from 'react-router-dom';
+import { articlesURL } from "../utils/constant";
+import { localStorageKey } from "../utils/constant";
 
 class Article extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            favoritesCount: 0,
+        }
     }
+
+    handleHeart = (e) => {
+        //console.log(e.target, 'heart', this.props.user.token);
+        // console.log('inside if', this.state.favoritesCount);
+        if (!this.state.favoritesCount) {
+            fetch(articlesURL + '/' + this.props.article.slug + '/favorite', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: `Token ${this.props.user.token}`
+                },
+
+            }).then((res) => res.json()).then((article) => this.setState({
+                favoritesCount: article.article.favoritesCount
+            }))
+
+
+        } else {
+            // console.log('inside else', this.state.favoritesCount);
+
+            fetch(articlesURL + '/' + this.props.article.slug + '/favorite', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: `Token ${this.props.user.token}`
+                },
+
+            }).then((res) => res.json()).then((article) => this.setState({
+                favoritesCount: article.article.favoritesCount
+            }))
+
+
+        }
+    }
+
+
+    componentDidMount() {
+        fetch(articlesURL + '/' + this.props.article.slug).then((res) => res.json()).then((article) => {
+            this.setState({
+                favoritesCount: article.article.favoritesCount,
+            })
+        })
+    }
+
     render() {
+        // console.log(this.state.favoriteCount);
         const { article } = this.props;
-       // console.log('props', article);
+        // console.log('props', article.slug);
         return (
             <>
                 <div className="flex space-between align-center article ">
@@ -36,9 +84,10 @@ class Article extends React.Component {
 
                         </div>
                     </div>
-                    <div className="heart">
+                    <div className="heart flex colom" onClick={this.handleHeart} >
 
                         <i class="fas fa-heart"></i>
+                        <span>{this.state.favoritesCount}</span>
 
                     </div>
 
@@ -53,4 +102,4 @@ class Article extends React.Component {
 
 }
 
-export default Article;
+export default withRouter(Article);
